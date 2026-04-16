@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TruthLens</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🔍 TruthLens</h1>
+    <p class="tagline">AI-Powered Scam Detection System</p>
+
+    <form method="POST" enctype="multipart/form-data" class="card">
+        <textarea name="text" placeholder="Paste message, link, or upload image/PDF..."></textarea>
+
+        <input type="file" name="file">
+
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if result %}
+    <div class="result-card {{ result.status }}">
+        <div class="score">{{ result.score }}</div>
+        <h2>{{ result.status }}</h2>
+
+        <p class="explanation">{{ result.explanation }}</p>
+
+        <h3>🔍 Reasons:</h3>
+        <ul>
+            {% for r in result.reasons %}
+            <li>{{ r }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>📝 Extracted Text:</h3>
+        <p class="text-box">{{ result.text }}</p>
+
+        <h3>⚠️ Suggested Action:</h3>
+        <p class="action">{{ result.action }}</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
